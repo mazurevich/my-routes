@@ -1,7 +1,7 @@
 "use client";
 
-import { Toggle } from "@/components/Toggle";
-import { useTheme } from "@/theme";
+import { Toggle } from "@/app/components/Toggle";
+import { useTheme } from "@/app/theme";
 
 export const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useTheme();

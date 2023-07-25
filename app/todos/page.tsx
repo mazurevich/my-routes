@@ -1,18 +1,9 @@
-import { SearchInput } from "@/components";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import { useState, Suspense } from "react";
-import { z } from "zod";
-
-const todoSchema = z.object({
-  userId: z.number(),
-  id: z.number(),
-  title: z.string(),
-  completed: z.boolean(),
-});
-
-type Todo = z.infer<typeof todoSchema>;
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+import { SearchInput } from "@/app/components";
+import { ThemeSwitcher } from "@/app/components/ThemeSwitcher";
+import { store } from "@/app/store";
+import { loadTodosSuccess } from "./todoSlice";
+import { todoSchema } from "./schemas";
+import { TodoListWrapper } from "./components/TodoListWrapper";
 
 async function getTodos() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
@@ -21,27 +12,16 @@ async function getTodos() {
   return todoSchema.array().parse(data);
 }
 
-async function TodosList() {
+export default async function TodosPage() {
   const todos = await getTodos();
+  store.dispatch(loadTodosSuccess(todos));
 
-  return (
-    <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default function TodosPage() {
   return (
     <>
       <h1 className="mb-5 bold text-3xl">Todos List</h1>
       <SearchInput />
       <ThemeSwitcher />
-      <Suspense fallback={<div>Loading...</div>}>
-        <TodosList />
-      </Suspense>
+      <TodoListWrapper />
     </>
   );
 }

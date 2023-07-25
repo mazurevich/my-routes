@@ -1,5 +1,5 @@
 "use client";
-import { useTheme } from "@/theme";
+import { useTheme } from "@/app/theme";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 "use client";
-import { Theme } from "@/lib/types";
+import { Theme } from "@/app/types/theme";
 import { FC, ReactNode, createContext, useContext, useState } from "react";
 
 export const ThemeContext = createContext({
