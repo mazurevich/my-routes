@@ -11,7 +11,6 @@ export function middleware(request: NextRequest) {
   // Add the client's IP address to the request headers using the 'x-forwarded-for' field
   requestHeaders.set("x-forwarded-for", ip);
 
-  console.log("request", JSON.stringify(request, null, 2));
   // Return a new request object with the updated headers using NextResponse.next()
   return NextResponse.next({
     request: {

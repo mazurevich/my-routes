@@ -1,7 +1,7 @@
-import { headers } from "next/headers";
+import { getIP } from "@/app/utils/getIP";
 
 export const IP = () => {
-  const ip = headers().get("x-forwarded-for");
+  const ip = getIP();
 
   return (
     <div>
