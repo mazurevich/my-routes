@@ -1,8 +1,9 @@
 import { ThemeSwitcher } from "@/app/components/ThemeSwitcher";
-import Image from "next/image";
 import { IP } from "./components/IP";
 import { Map } from "./components/Map";
 import { getPositionByIp, getIP } from "./utils";
+import { signIn } from "next-auth/react";
+import { StravaLoginButton } from "./components/StravaLoginButton";
 
 export default async function Home() {
   const ip = getIP();
@@ -10,6 +11,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <StravaLoginButton />
       <IP />
       <Map defaultPosition={coords} />
     </main>

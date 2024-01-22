@@ -36,8 +36,5 @@ export const getPositionByIp = async (ip: string): Promise<Coords> => {
   const data = await response.json();
 
   const parsedData = ipResponse.parse(data);
-  return {
-    lat: parsedData.latitude,
-    lng: parsedData.longitude,
-  };
+  return { lat: parsedData.latitude, lng: parsedData.longitude };
 };

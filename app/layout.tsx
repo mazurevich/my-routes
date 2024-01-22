@@ -4,8 +4,17 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { link } from "fs";
 import { Theme } from "@/app/types/theme";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { getServerSession } from "next-auth";
+import { SessionProvider } from "./components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +33,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const theme = await fetchTheme();
+  const session = await getServerSession();
 
   return (
     <html lang="en">
@@ -48,8 +58,15 @@ export default async function RootLayout({
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
-      <body className={inter.className}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <SessionProvider session={session}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
