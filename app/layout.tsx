@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 const fetchTheme = () => {
   return new Promise<Theme>((resolve) =>
-    Math.random() > 0.5 ? resolve("light") : resolve("dark")
+    Math.random() > 0.5 ? resolve("light") : resolve("dark"),
   );
 };
 
@@ -61,7 +61,7 @@ export default async function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <SessionProvider session={session}>

@@ -6,14 +6,13 @@ import { signIn } from "next-auth/react";
 import { StravaLoginButton } from "./components/StravaLoginButton";
 
 export default async function Home() {
-  const ip = getIP();
-  const coords = await getPositionByIp(ip);
+  // const ip = getIP();
+  // const coords = await getPositionByIp(ip);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <StravaLoginButton />
-      <IP />
-      <Map defaultPosition={coords} />
+      <Map defaultPosition={{ lat: 23, lng: 54 }} />
     </main>
   );
 }
