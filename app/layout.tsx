@@ -8,6 +8,7 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import { SessionProvider } from "./components/SessionProvider";
+import { AppHeader } from "./components/Layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,7 +66,12 @@ export default async function RootLayout({
         )}
       >
         <SessionProvider session={session}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <AppHeader />
+            <main className="flex w-full flex-1 flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+              {children}
+            </main>
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>
